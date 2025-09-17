@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/Home";
+import URLsPage from "./pages/URLs";
+import ImagesPage from "./pages/Images";
+import VideosPage from "./pages/Videos";
+import SocialMediaPage from "./pages/SMLinks";
 
 function App() {
+  const [active, setActive] = useState("Home");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex flex-col bg-darkBg text-white">
+      <Navbar active={active} setActive={setActive} />
+      <main className="flex-1 p-6">
+        {active === "Home" && <HomePage />}
+        {active === "URLs" && <URLsPage />}
+        {active === "Images" && <ImagesPage />}
+        {active === "Videos" && <VideosPage />}
+        {active === "Social Media Links" && <SocialMediaPage />}
+      </main>
     </div>
   );
 }
