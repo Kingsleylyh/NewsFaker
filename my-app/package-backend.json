@@ -1,0 +1,11 @@
+{
+  "name": "scraper-backend",
+  "scripts": {
+    "start": "node src/api/scrape.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5"
+  }
+}
