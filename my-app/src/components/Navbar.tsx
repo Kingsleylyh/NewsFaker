@@ -45,11 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
           ))}
         </div>
       </div>
-
-      {/* Profile Picture */}
-      <button className="rounded-full border-2 border-neonBlue p-1 hover:scale-105 transition-transform">
-        <User size={28} className="text-neonBlue" />
-      </button>
     </nav>
   );
 };
