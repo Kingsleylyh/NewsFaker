@@ -17,27 +17,30 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-[#111827] shadow-md">
-      {/* Left Section with logo + nav items */}
-      <div className="flex items-center gap-8">
-        {/* Logo */}
-        <img
-          src="/Logo.png"
-          alt="Logo"
-          className="h-10 w-auto cursor-pointer hover:scale-105 transition-transform"
-          onClick={() => setActive("Home")}
-        />
+      {/* Left Section with logo */
+        <div className="flex item-left gap-8 ">
+          {/* Logo */}
+          <img
+            src="/Logo.png"
+            alt="Logo"
+            className="h-10 w-auto cursor-pointer hover:scale-105 transition-transform"
+            onClick={() => setActive("Home")}
+          />
+        </div>
+      }
 
+      {/* Right Section with Nav items */}
+      <div className="flex items-right gap-8">
         {/* Nav items */}
         <div className="flex items-center gap-6">
           {items.map((item) => (
             <button
               key={item.name}
               onClick={() => setActive(item.name)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all ${
-                active === item.name
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all ${active === item.name
                   ? "bg-primary text-black font-bold shadow-lg"
                   : "text-gray-400 hover:text-primary"
-              }`}
+                }`}
             >
               {item.icon}
               <span>{item.name}</span>
