@@ -43,7 +43,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
   };
 
   return (
-    <div className="min-h-screen darkBg flex flex-col items-center justify-start py-16 px-4">
+    <div className="min-h-screen darkBg flex flex-col items-center justify-start py-20 px-4">
       <h1 className="mb-8 text-4xl text-primary/95 font-semibold">What can I help with?</h1>
 
       {/* Chat container */}
