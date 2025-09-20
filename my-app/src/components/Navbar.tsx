@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Link, Image, Video, Share2, User } from "lucide-react";
+import { MessageCirclePlus, Home, Link, Image, ScanText, Share2 } from "lucide-react";
 
 type NavbarProps = {
   active: string;
@@ -8,11 +8,12 @@ type NavbarProps = {
 
 const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
   const items = [
-    { name: "Home", icon: <Home size={20} /> },
-    { name: "URLs", icon: <Link size={20} /> },
-    { name: "Images", icon: <Image size={20} /> },
-    { name: "Videos", icon: <Video size={20} /> },
-    { name: "Social Media Links", icon: <Share2 size={20} /> },
+    {name: "New Chat", icon: <MessageCirclePlus size={20}/>}
+    // { name: "Home", icon: <Home size={20} /> },
+    // { name: "URLs", icon: <Link size={20} /> },
+    // { name: "Media", icon: <Image size={20} /> },
+    // { name: "Text", icon: <ScanText size={20} /> },
+    // { name: "X (Twitter)", icon: <Share2 size={20} /> },
   ];
 
   return (
