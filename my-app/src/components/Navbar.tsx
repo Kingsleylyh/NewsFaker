@@ -35,8 +35,8 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
               onClick={() => setActive(item.name)}
               className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all ${
                 active === item.name
-                  ? "bg-neonBlue text-black font-bold shadow-lg"
-                  : "text-gray-400 hover:text-neonBlue"
+                  ? "bg-primary text-black font-bold shadow-lg"
+                  : "text-gray-400 hover:text-primary"
               }`}
             >
               {item.icon}

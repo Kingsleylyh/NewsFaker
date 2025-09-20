@@ -6,7 +6,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        neonBlue: "#00faff",
+        neonBlue: "#256ede",
+        primary: "#256ede",
         neonPink: "#ff00ff",
         darkBg: "#0a0f1f",
       },
