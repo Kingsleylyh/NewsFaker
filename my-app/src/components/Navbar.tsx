@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
             src="/Logo.png"
             alt="Logo"
             className="h-10 w-auto cursor-pointer hover:scale-105 transition-transform"
-            onClick={() => setActive("Home")}
+            onClick={() => setActive("New C")}
           />
         </div>
       }
