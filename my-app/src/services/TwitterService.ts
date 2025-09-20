@@ -1,4 +1,7 @@
+import { config } from './config';
+
 export interface TwitterPost {
+  success: boolean;
   text: string;
   author: string;
   username: string;
@@ -12,21 +15,33 @@ export class TwitterService {
 
   async getPost(tweetUrl: string): Promise<TwitterPost> {
     try {
-      // Use backend scraper for Twitter posts
-      const response = await fetch('http://localhost:3001/api/scrape-twitter', {
+      const response = await fetch(`${config.apiBaseUrl}/api/scrape-twitter`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ url: tweetUrl })
       });
       
-      return await response.json();
+      const data: TwitterPost = await response.json();
+
+      if (!response.ok) {
+        // Handle HTTP errors from our API
+        throw new Error(data.error || `Failed to fetch tweet (API error: ${response.status})`);
+      }
+
+      // The API returns success: true and the structured data
+      return data;
+
     } catch (error) {
-      return { 
-        text: '', 
-        author: '', 
-        username: '', 
-        url: tweetUrl, 
-        error: error instanceof Error ? error.message : 'Failed to fetch tweet' 
+      console.error('Twitter service error:', error);
+      return {
+        success: false,
+        text: '',
+        author: '',
+        username: '',
+        url: tweetUrl,
+        error: error instanceof Error ? error.message : 'Failed to fetch tweet due to a network error'
       };
     }
   }
