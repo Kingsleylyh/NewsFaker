@@ -4,16 +4,12 @@ import { MessageCirclePlus, Home, Link, Image, ScanText, Share2 } from "lucide-r
 type NavbarProps = {
   active: string;
   setActive: (page: string) => void;
+  reloadChat: () => void
 };
 
-const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
+const Navbar: React.FC<NavbarProps> = ({ active, setActive , reloadChat}) => {
   const items = [
-    {name: "New Chat", icon: <MessageCirclePlus size={20}/>}
-    // { name: "Home", icon: <Home size={20} /> },
-    // { name: "URLs", icon: <Link size={20} /> },
-    // { name: "Media", icon: <Image size={20} /> },
-    // { name: "Text", icon: <ScanText size={20} /> },
-    // { name: "X (Twitter)", icon: <Share2 size={20} /> },
+    { name: "New Chat", icon: <MessageCirclePlus size={20} /> }
   ];
 
   return (
@@ -25,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
             src="/Logo.png"
             alt="Logo"
             className="h-10 w-auto cursor-pointer hover:scale-105 transition-transform"
-            onClick={() => setActive("New C")}
+            onClick={() => { setActive("New Chat"); reloadChat(); }}
           />
         </div>
       }
@@ -37,11 +33,8 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
           {items.map((item) => (
             <button
               key={item.name}
-              onClick={() => setActive(item.name)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all ${active === item.name
-                  ? "bg-primary text-black font-bold shadow-lg"
-                  : "text-gray-400 hover:text-primary"
-                }`}
+              onClick={() => {setActive(item.name); if(item.name === "New Chat") reloadChat();}}
+              className="flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-grey-400 hover:bg-primary hover:text-black"
             >
               {item.icon}
               <span>{item.name}</span>
