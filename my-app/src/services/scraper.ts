@@ -15,7 +15,7 @@ export interface ScrapeResult {
 export class WebScraper {
   private bedrock: BedrockRuntimeClient;
 
-  constructor(region = 'ap-southeast-1') {
+  constructor(region = 'us-east-1') {
     this.bedrock = new BedrockRuntimeClient({ region });
   }
 
