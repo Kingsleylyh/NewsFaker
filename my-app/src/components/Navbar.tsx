@@ -13,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ active, setActive , reloadChat}) => {
   ];
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-[#111827] shadow-md">
+    <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#111827] shadow-md">
       {/* Left Section with logo */
         <div className="flex item-left gap-8 ">
           {/* Logo */}
