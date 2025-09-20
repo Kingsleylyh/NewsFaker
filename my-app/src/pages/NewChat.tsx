@@ -66,7 +66,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
               <button
                 onClick={handleSend}
                 disabled={sending || !text.trim()}
-                className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md hover:scale-[1.03] transition-transform disabled:opacity-50"
+                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-md hover:scale-[1.03] transition-transform disabled:opacity-50"
                 aria-label="Send"
               >
                 <ArrowUp size={20} className="primary text-black font-bold" />
