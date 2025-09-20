@@ -21,4 +21,22 @@ app.post('/api/scrape', async (req, res) => {
   }
 });
 
+app.post('/api/scrape-twitter', async (req, res) => {
+  try {
+    const { url } = req.body;
+    
+    // Use nitter.net as proxy (free Twitter frontend)
+    const nitterUrl = url.replace('twitter.com', 'nitter.net').replace('x.com', 'nitter.net');
+    
+    const response = await axios.get(nitterUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+      timeout: 10000
+    });
+
+    res.json({ url, html: response.data });
+  } catch (error) {
+    res.json({ url: req.body.url, error: error.message });
+  }
+});
+
 app.listen(3001, () => console.log('Scraper API running on port 3001'));
