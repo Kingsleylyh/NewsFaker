@@ -92,7 +92,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
       <div
         className={`${
           hasMessages ? "flex-1" : ""
-        } w-full overflow-y-auto px-4 pt-20 pb-40 flex flex-col items-center min-h-0`}
+        } scrollable w-full overflow-y-auto mt-20 mb-24 px-4 flex flex-col items-center min-h-0`}
       >
         {/* Heading (only before first message) */}
         {!hasMessages && (
@@ -111,7 +111,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
 
       {/* Input container */}
       <div
-        className={`${hasMessages ? "absolute bottom-0 left-0 right-0" : ""}
+        className={`${hasMessages ? "absolute bottom-6 left-0 right-0" : ""}
           w-full`}
       >
         <div className="w-full max-w-4xl mx-auto px-4 py-0">
