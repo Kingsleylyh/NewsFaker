@@ -53,7 +53,7 @@ Our solution, **NewsFaker**, empowers media outlets, educators, and the public t
 1. **Clone the repository**  
    ```bash
    git clone https://github.com/your-username/newsfaker.git
-   cd newsfaker
+   cd newsfaker/my-app
    ```
 
 2. **Install dependencies**  
