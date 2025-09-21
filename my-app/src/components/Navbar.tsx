@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageCirclePlus, Home, Link, Image, ScanText, Share2 } from "lucide-react";
+import { MessageCirclePlus} from "lucide-react";
 
 type NavbarProps = {
   active: string;
