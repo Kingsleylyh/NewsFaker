@@ -81,3 +81,6 @@ Our solution, **NewsFaker**, empowers media outlets, educators, and the public t
    ```
 
 ---
+
+## 📜 License  
+This project is licensed under the [MIT License](LICENSE).  
