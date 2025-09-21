@@ -3,10 +3,10 @@ export class BedrockFlowService {
 
   private getEndpoint(type: 'Text' | 'URLs' | 'X' | 'Media'): string {
     const endpoints = {
-      'Text': '/text',
-      'URLs': '/urls', 
-      'X': '/twitter',
-      'Media': '/media'
+      'Text': '/chat', // change the addresses here to whatever endpoint babebibobu you got =D 
+      'URLs': '/chat', 
+      'X': '/chat',
+      'Media': '/chat'
     };
     return `${this.baseUrl}${endpoints[type]}`;
   }
