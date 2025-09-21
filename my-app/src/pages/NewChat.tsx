@@ -59,7 +59,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
     try {
       let replyText = "";
 
-      if (["Text", "URLs", "X", "Media"].includes(active)) {
+      if (["Text", "URLs", "X", "Media"].includes(active) && active !== "Media") {
         setText("");
         replyText = await bedrockService.current.analyzeContent(
           text.trim(),
@@ -165,20 +165,33 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
           {!hasMessages && (
             <div className="mt-4 flex justify-center">
               <div className="flex flex-wrap gap-3 items-center">
-                {items.map((it) => (
-                  <button
-                    key={it.name}
-                    onClick={() => setActive(it.name)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors text-sm ${active === it.name
-                        ? "bg-primary text-black font-medium"
-                        : "text-gray-300 hover:bg-white/5"
-                      }`}
-                    aria-pressed={active === it.name}
-                  >
-                    <span className="opacity-90">{it.icon}</span>
-                    <span className="whitespace-nowrap">{it.name}</span>
-                  </button>
-                ))}
+                {items.map((it) => {
+                  const isDisabled = it.name === "Media";
+                  return (
+                    <div key={it.name} className="relative group">
+                      <button
+                        onClick={() => !isDisabled && setActive(it.name)}
+                        disabled={isDisabled}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors text-sm ${
+                          isDisabled
+                            ? "text-gray-500 cursor-not-allowed opacity-50"
+                            : active === it.name
+                            ? "bg-primary text-black font-medium"
+                            : "text-gray-300 hover:bg-white/5"
+                          }`}
+                        aria-pressed={active === it.name}
+                      >
+                        <span className="opacity-90">{it.icon}</span>
+                        <span className="whitespace-nowrap">{it.name}</span>
+                      </button>
+                      {isDisabled && (
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                          Feature not yet available
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
