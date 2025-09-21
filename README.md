@@ -1,0 +1,3 @@
+# Great Malaysia AI Hackathon 2025 - NewsFaker
+## News/Fact Checking Web Application
+A webite that scours and scrapes the internet for information pertaining to your query, providing fact check summaries ....
