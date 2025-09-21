@@ -6,3 +6,8 @@ body {
   background-color: #18181b; /* Replace with your darkBg color */
   color: #fff;
 }
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* prevent outer scrollbar */
+}

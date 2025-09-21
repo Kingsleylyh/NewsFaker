@@ -7,17 +7,16 @@ import SocialMediaPage from "./pages/SMLinks";
 import NewChat from "./pages/NewChat";
 
 function App() {
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState("New Chat");
+  const [chatKey, setChatKey] = useState(0);
+
+  const reloadChat = () => setChatKey((prev) => prev + 1 )
 
   return (
     <div className="min-h-screen flex flex-col bg-darkBg text-white">
-      <Navbar active={active} setActive={setActive} />
+      <Navbar active={active} setActive={setActive} reloadChat={reloadChat}/>
       <main className="flex-1 p-6">
-        {active === "New Chat" && <NewChat />}
-        {/* {active === "URLs" && <URLsPage />}
-        {active === "Images" && <ImagesPage />}
-        {active === "Videos" && <VideosPage />}
-        {active === "Social Media Links" && <SocialMediaPage />} */}
+        {active === "New Chat" && <NewChat key={chatKey}/>}
       </main>
     </div>
   );
