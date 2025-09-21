@@ -1,32 +1,32 @@
-import { BedrockAgentRuntimeClient, InvokeFlowCommand } from '@aws-sdk/client-bedrock-agent-runtime';
-
 export class BedrockFlowService {
-  private client: BedrockAgentRuntimeClient;
+  private apiEndpoint = 'https://zbbups6sz4.execute-api.us-east-1.amazonaws.com/DEV/chat';
 
-  constructor() {
-    this.client = new BedrockAgentRuntimeClient({
-      region: process.env.AWS_REGION || 'us-east-1'
-    });
-  }
-
-  async analyzeContent(content: string, flowId: string): Promise<any> {
+  async analyzeContent(content: string, type: 'Text' | 'URLs' | 'X'): Promise<string> {
     try {
-      const command = new InvokeFlowCommand({
-        flowIdentifier: flowId,
-        flowAliasIdentifier: 'TSTALIASID',
-        inputs: [
-          {
-            content: { document: content },
-            nodeName: 'FlowInputNode',
-            nodeOutputName: 'document'
-          }
-        ]
+      const response = await fetch(this.apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: content,
+          type: type
+        })  
       });
 
-      const response = await this.client.send(command);
-      return response.responseStream;
+      const result = await response.json();
+      
+      if (!response.ok) {
+        const errorMessage = result.error || result.message || `${response.status} ${response.statusText}`;
+        throw new Error(errorMessage);
+      }
+
+      return result.response || result.message || 'Analysis completed';
     } catch (error) {
-      throw new Error(`Flow invocation failed: ${error.message}`);
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error(`Network error: ${String(error)}`);
     }
   }
 }

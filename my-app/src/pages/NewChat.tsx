@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ArrowUp, Link, Image, ScanText, Share2 } from "lucide-react";
+import { BedrockFlowService } from "../services/BedrockFlowService";
 
 type ChatInputWithItemsProps = {
   onSend?: (
@@ -32,6 +33,7 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
   const [messages, setMessages] = useState<Message[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
+  const bedrockService = useRef(new BedrockFlowService());
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -55,18 +57,33 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
     setMessages((prev) => [...prev, userMsg]);
 
     try {
-      const maybeReply = await onSend?.(text.trim(), active);
+      let replyText = "";
+      
+      if (active === "Media") {
+        replyText = "Media analysis is not yet available.";
+      } else if (["Text", "URLs", "X"].includes(active)) {
+        replyText = await bedrockService.current.analyzeContent(
+          text.trim(), 
+          active as 'Text' | 'URLs' | 'X'
+        );
+      } else {
+        replyText = await onSend?.(text.trim(), active) || `Processed: ${text.trim()}`;
+      }
+
       const replyMsg: Message = {
         id: Date.now() + 1,
         role: "assistant",
-        text:
-          typeof maybeReply === "string"
-            ? maybeReply
-            : `Got it! You sent: "${text.trim()}" (category: ${active})`,
+        text: typeof replyText === "string" ? replyText : `Processed: ${text.trim()}`,
       };
       setMessages((prev) => [...prev, replyMsg]);
     } catch (err) {
       console.error(err);
+      const errorMsg: Message = {
+        id: Date.now() + 1,
+        role: "assistant",
+        text: "Sorry, there was an error processing your request.",
+      };
+      setMessages((prev) => [...prev, errorMsg]);
     } finally {
       setSending(false);
       setText("");
