@@ -1,9 +1,19 @@
 export class BedrockFlowService {
-  private apiEndpoint = 'https://zbbups6sz4.execute-api.us-east-1.amazonaws.com/DEV/chat';
+  private baseUrl = 'https://zbbups6sz4.execute-api.us-east-1.amazonaws.com/DEV';
 
-  async analyzeContent(content: string, type: 'Text' | 'URLs' | 'X'): Promise<string> {
+  private getEndpoint(type: 'Text' | 'URLs' | 'X' | 'Media'): string {
+    const endpoints = {
+      'Text': '/text',
+      'URLs': '/urls', 
+      'X': '/twitter',
+      'Media': '/media'
+    };
+    return `${this.baseUrl}${endpoints[type]}`;
+  }
+
+  async analyzeContent(content: string, type: 'Text' | 'URLs' | 'X' | 'Media'): Promise<string> {
     try {
-      const response = await fetch(this.apiEndpoint, {
+      const response = await fetch(this.getEndpoint(type), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

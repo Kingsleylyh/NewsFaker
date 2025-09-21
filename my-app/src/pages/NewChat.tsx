@@ -59,14 +59,11 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
     try {
       let replyText = "";
 
-      if (active === "Media") {
-        setText("");
-        replyText = "Media analysis is not yet available.";
-      } else if (["Text", "URLs", "X"].includes(active)) {
+      if (["Text", "URLs", "X", "Media"].includes(active)) {
         setText("");
         replyText = await bedrockService.current.analyzeContent(
           text.trim(),
-          active as 'Text' | 'URLs' | 'X'
+          active as 'Text' | 'URLs' | 'X' | 'Media'
         );
       } else {
         replyText = await onSend?.(text.trim(), active) || `Processed: ${text.trim()}`;
