@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import URLsPage from "./pages/URLs";
-import ImagesPage from "./pages/Images";
-import VideosPage from "./pages/Videos";
-import SocialMediaPage from "./pages/SMLinks";
 import NewChat from "./pages/NewChat";
 
 function App() {
