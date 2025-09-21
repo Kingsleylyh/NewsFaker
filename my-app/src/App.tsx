@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-darkBg text-white">
       <Navbar active={active} setActive={setActive} reloadChat={reloadChat}/>
-      <main className="flex-1 p-6">
+      <main className="flex-1">
         {active === "New Chat" && <NewChat key={chatKey}/>}
       </main>
     </div>
