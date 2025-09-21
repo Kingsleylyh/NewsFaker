@@ -58,12 +58,14 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
 
     try {
       let replyText = "";
-      
+
       if (active === "Media") {
+        setText("");
         replyText = "Media analysis is not yet available.";
       } else if (["Text", "URLs", "X"].includes(active)) {
+        setText("");
         replyText = await bedrockService.current.analyzeContent(
-          text.trim(), 
+          text.trim(),
           active as 'Text' | 'URLs' | 'X'
         );
       } else {
@@ -101,15 +103,13 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
 
   return (
     <div
-      className={`h-screen darkBg flex flex-col relative ${
-        !hasMessages ? "justify-center" : ""
-      }`}
+      className={`h-screen darkBg flex flex-col relative ${!hasMessages ? "justify-center" : ""
+        }`}
     >
       {/* Chat content area */}
       <div
-        className={`${
-          hasMessages ? "flex-1" : ""
-        } scrollable w-full overflow-y-auto mt-20 mb-24 px-4 flex flex-col items-center min-h-0`}
+        className={`${hasMessages ? "flex-1" : ""
+          } scrollable w-full overflow-y-auto mt-20 mb-24 px-4 flex flex-col items-center min-h-0`}
       >
         {/* Heading (only before first message) */}
         {!hasMessages && (
@@ -123,6 +123,11 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
             <MessageBubble key={m.id} role={m.role} text={m.text} />
           ))}
           <div ref={endOfMessagesRef} />
+          {sending && (
+            <div className="w-full flex justify-start">
+              <div className="w-5 h-5 border-2 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -167,11 +172,10 @@ const NewChat: React.FC<ChatInputWithItemsProps> = ({
                   <button
                     key={it.name}
                     onClick={() => setActive(it.name)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors text-sm ${
-                      active === it.name
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors text-sm ${active === it.name
                         ? "bg-primary text-black font-medium"
                         : "text-gray-300 hover:bg-white/5"
-                    }`}
+                      }`}
                     aria-pressed={active === it.name}
                   >
                     <span className="opacity-90">{it.icon}</span>
